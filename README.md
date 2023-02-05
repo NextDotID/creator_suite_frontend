@@ -1,2 +1,3 @@
-# creator_suite_fronted
+# Creator Suite Fronted with next.js && rainbowkit
+
 creator suite fronted repo
