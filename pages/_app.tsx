@@ -3,9 +3,8 @@ import "@rainbow-me/rainbowkit/styles.css";
 import type { AppProps } from "next/app";
 import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { mainnet, polygon, optimism, arbitrum, goerli } from "wagmi/chains";
+import { mainnet, polygon, goerli } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
-import { ToastProvider } from "react-toast-notifications";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -32,10 +31,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>
-        <ToastProvider>
-          <div className="web3bio-cover"></div>
-          <Component {...pageProps} />
-        </ToastProvider>
+        <div className="web3bio-cover"></div>
+        <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
   );

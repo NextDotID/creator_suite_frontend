@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { useAccount, useContractRead } from "wagmi";
 import { assetID, unlockContractAddress } from "../../constants/contract";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useToasts } from "react-toast-notifications";
 
 export default function ContentPage() {
   const [key, setKey] = useState("");
@@ -14,7 +13,6 @@ export default function ContentPage() {
   const { address: account } = useAccount();
   const [isUnlocked,setIsUnlocked] = useState(false)
   const router = useRouter();
-  const { addToast } = useToasts();
 
   const { data: checkPaymentRes, isLoading: checkPaymentLoading } = useContractRead({
     address: unlockContractAddress,
