@@ -1,6 +1,7 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import type { NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
@@ -19,8 +20,18 @@ const Home: NextPage = () => {
         <ConnectButton />
 
         <h1 className={styles.title}>
-          Welcome to <a href="">Creator Suite</a> + <a href="">CoreService</a>
+          Welcome to <a href="">Creator Suite</a>
         </h1>
+        <h3>Choose your charatar to start your trip</h3>
+
+        <div className={styles.choose_box}>
+          <Link href={"/creator/list"}>
+            <h3 className={styles.role_item_box}>I'm Creator</h3>
+          </Link>
+          <Link href={"/buyer/content"}>
+            <h3 className={styles.role_item_box}>I'm Buyer</h3>
+          </Link>
+        </div>
       </main>
 
       <footer className={styles.footer}>
