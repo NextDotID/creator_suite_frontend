@@ -25,7 +25,7 @@ const Home: NextPage = () => {
         <h3>Choose your charatar to start your trip</h3>
 
         <div className={styles.choose_box}>
-          <Link href={"/creator/list"}>
+          <Link href={"/creator/files"}>
             <h3 className={styles.role_item_box}>I'm Creator</h3>
           </Link>
           <Link href={"/buyer/content"}>

@@ -33,9 +33,9 @@ const useTreeItemStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       color: theme.palette.text.secondary,
-      // "&:hover > $content": {
-      //   backgroundColor: theme.palette.action.hover,
-      // },
+      "&:hover > $content": {
+        backgroundColor: theme.palette.action.hover,
+      },
       "&:focus > $content, &$selected > $content": {
         backgroundColor: `var(--tree-view-bg-color, ${theme.palette.grey[400]})`,
         color: "var(--tree-view-color)",
@@ -181,8 +181,8 @@ export default function FilesPage() {
                     <StyledTreeItem
                       key={y.id}
                       onClick={() => {
-                        console.log(y)
-                        setCurSelect(y)
+                        console.log(y);
+                        setCurSelect(y);
                       }}
                       nodeId={y.id.toString()}
                       labelText={y.name}
