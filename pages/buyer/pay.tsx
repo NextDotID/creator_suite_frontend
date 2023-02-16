@@ -87,7 +87,7 @@ export default function PayPage() {
       <div>Aries Horoscope for the Year 2023 ...</div>
       {/* {utils.parseUnits(price, 'ether')} */}
       <div className={styles.explain}>
-        {price} TESTA to unlock the whole content
+        {100000} TESTA to unlock the whole content
       </div>
 
       <button onClick={() => onApprove?.()}>Approve Token</button>

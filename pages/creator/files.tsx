@@ -13,6 +13,7 @@ import { Button } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import SaveIcon from "@material-ui/icons/Save";
+import { useRouter } from "next/router";
 
 declare module "csstype" {
   interface Properties {
@@ -158,6 +159,7 @@ const useTreeViewStyles = makeStyles((theme) =>
 export default function FilesPage() {
   const classes = useTreeViewStyles();
   const [curSelect, setCurSelect] = useState<any>("");
+  const router = useRouter()
   return (
     <div className={classes.container}>
       <div className={classes.cardBox}>
@@ -231,6 +233,20 @@ export default function FilesPage() {
             startIcon={<DeleteIcon />}
           >
             DELETE
+          </Button>
+          <Button
+            variant="contained"
+            color="default"
+            size="small"
+            startIcon={<DeleteIcon />}
+            onClick={()=>{
+              router.push({
+                pathname:'/creator/detail',
+                
+              })
+            }}
+          >
+            DETAIL
           </Button>
         </div>
       </div>
