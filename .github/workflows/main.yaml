@@ -7,11 +7,11 @@ on:
 
 jobs:
   build-frontend-image:
-    if: github.repository == 'creator_suite_fronted'
+    if: github.repository == 'nextdotid/creator_suite_fronted'
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: creator_suite_frontend_v2
+      IMAGE_NAME: nextdotid/creator_suite_frontend_v2
     steps:
       - name: Checkout
         uses: actions/checkout@v3
