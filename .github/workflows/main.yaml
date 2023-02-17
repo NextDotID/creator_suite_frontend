@@ -3,7 +3,7 @@ name: Build creator suite frontend container
 on:
   push:
     branches:
-      - 'feature/dockerfile'
+      - "feature/dockerfile"
 
 jobs:
   build-frontend-image:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: ${{ github.repository }}_frontend_v2
+      IMAGE_NAME: creator_suite_frontend_v2
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -41,7 +41,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: '.'
+          context: "."
           push: true
           file: ./Dockerfile
           tags: |
