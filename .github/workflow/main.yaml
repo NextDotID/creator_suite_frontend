@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: ${{ github.repository }}_frontend_v2
+      IMAGE_NAME: creator_suite_frontend_v2
     steps:
       - name: Checkout
         uses: actions/checkout@v3
