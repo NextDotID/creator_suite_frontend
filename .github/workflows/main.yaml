@@ -3,7 +3,7 @@ name: Build creator suite frontend container
 on:
   push:
     branches:
-      - "feature/dockerfile"
+      - 'feature/dockerfile'
 
 jobs:
   build-frontend-image:
@@ -41,7 +41,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: "."
+          context: '.'
           push: true
           file: ./Dockerfile
           tags: |
