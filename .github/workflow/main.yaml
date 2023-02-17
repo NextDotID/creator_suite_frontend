@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-creator-suite-frontend-image:
-    if: github.repository == 'creator_suite_fronted'
+    # if: github.repository == 'creator_suite_fronted'
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
