@@ -11,48 +11,29 @@ export default function ContentPage() {
   const [key, setKey] = useState("");
   const [loading, setLoading] = useState(false);
   const { address: account } = useAccount();
-  const [isUnlocked,setIsUnlocked] = useState(false)
+  const [isUnlocked, setIsUnlocked] = useState(false);
   const router = useRouter();
 
-  const { data: checkPaymentRes, isLoading: checkPaymentLoading } = useContractRead({
-    address: unlockContractAddress,
-    abi: contentFileABI.abi,
-    functionName: "isQualified",
-    args: [account, assetID],
-    // onSuccess(data) {
-    //   addToast("Query Unlock Verication Success", {
-    //     appearance: "success",
-    //     autoDismiss: true,
-    //   });
-    // },
-    // onError() {
-    //   addToast("Query Unlock Verication Error", {
-    //     appearance: "error",
-    //     autoDismiss: true,
-    //   });
-    // },
-  });
+  const { data: checkPaymentRes, isLoading: checkPaymentLoading } =
+    useContractRead({
+      address: unlockContractAddress,
+      abi: contentFileABI.abi,
+      functionName: "isQualified",
+      args: [account, assetID],
+    });
   // todo: check the router jump
-//   useEffect(() => {
-//     setIsUnlocked(checkPaymentRes as boolean)
-//     if (!checkPaymentLoading && router && router.isReady && !isUnlocked) {
-//       router.push({
-//         pathname: "/buyer/pay",
-//       });
-//     }
-//   }, [checkPaymentRes]);
+  useEffect(() => {
+    setIsUnlocked(checkPaymentRes as boolean);
+    console.log(checkPaymentLoading, "sss", checkPaymentRes);
+    // if (!checkPaymentLoading && router && router.isReady && !isUnlocked) {
+    //   router.push({
+    //     pathname: "/buyer/pay",
+    //   });
+    // }
+  }, [checkPaymentRes]);
 
-  // todo: qualityLoading
-  if (checkPaymentLoading)
-    return (
-      <div className={styles.container}>
-        <div className={styles.loading}></div>
-      </div>
-    );
   return (
     <div className={styles.container}>
-      {/* <main className={styles.main}> */}
-
       <div className={styles.connect}>
         <ConnectButton />
       </div>

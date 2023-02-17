@@ -2,9 +2,27 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useAccount } from "wagmi";
 import styles from "../styles/Home.module.css";
+import { isSameAddress } from "../utils/common";
 
 const Home: NextPage = () => {
+  const {address} = useAccount()
+  const router = useRouter()
+  useEffect(()=>{
+    if(address && isSameAddress(address,process.env.NEXT_PUBLIC_CREATOR_ADDRESS) ){
+      router.push({
+        pathname:'/creator/files'
+      })
+    }else{
+      router.push({
+        pathname:'/buyer/content'
+      })
+    }
+   
+  },[address])
   return (
     <div className={styles.container}>
       <Head>
@@ -24,14 +42,14 @@ const Home: NextPage = () => {
         </h1>
         <h3>Choose your charatar to start your trip</h3>
 
-        <div className={styles.choose_box}>
+        {/* <div className={styles.choose_box}>
           <Link href={"/creator/files"}>
             <h3 className={styles.role_item_box}>I'm Creator</h3>
           </Link>
           <Link href={"/buyer/content"}>
             <h3 className={styles.role_item_box}>I'm Buyer</h3>
           </Link>
-        </div>
+        </div> */}
       </main>
 
       <footer className={styles.footer}>
