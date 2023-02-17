@@ -6,7 +6,7 @@ on:
       - "feature/dockerfile"
 
 jobs:
-  build-frontend-image:
+  build-creator-suite-frontend-image:
     if: github.repository == 'creator_suite_fronted'
     runs-on: ubuntu-latest
     env:
