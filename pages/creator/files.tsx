@@ -14,7 +14,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import SaveIcon from "@material-ui/icons/Save";
 import { useRouter } from "next/router";
-import EncryptDialog from "./encryptDialog";
+import Modal from "../../components/Modal";
 
 declare module "csstype" {
   interface Properties {
@@ -160,11 +160,11 @@ const useTreeViewStyles = makeStyles((theme) =>
 export default function FilesPage() {
   const classes = useTreeViewStyles();
   const [curSelect, setCurSelect] = useState<any>("");
-  const [dialog, setDialog] = useState(false);
+  const [dialog, setDialog] = useState(true);
   const router = useRouter();
   return (
     <div className={classes.container}>
-      <EncryptDialog open={dialog} onClose={() => setDialog(false)} />
+      {dialog && <Modal  />}
       <div className={classes.cardBox}>
         <TreeView
           className={classes.root}
