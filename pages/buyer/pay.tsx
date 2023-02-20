@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./styles/content.module.css";
 import { useRouter } from "next/router";
-import { BigNumber, utils } from "ethers";
+import { BigNumber } from "ethers";
 import {
   useAccount,
   useContractRead,
