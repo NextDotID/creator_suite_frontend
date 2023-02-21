@@ -160,7 +160,7 @@ const useTreeViewStyles = makeStyles((theme) =>
 export default function FilesPage() {
   const classes = useTreeViewStyles();
   const [curSelect, setCurSelect] = useState<any>("");
-  const [dialog, setDialog] = useState(true);
+  const [dialog, setDialog] = useState(false);
   const router = useRouter();
   return (
     <div className={classes.container}>
