@@ -1,13 +1,25 @@
-// export async function getUnlockedContent(_privateKey: string) {
+export async function getUnlockedContent(address: string) {
+//   const eth = window.ethereum;
+//   if (!eth) return null;
 //   try {
-//     const privateKey = Buffer.from(_privateKey, "hex");
-//     const publicKey = (await getPublic(privateKey)).toString("hex");
 //     // content_id = 11 => encryption_type = 1
 //     // content_id =3 => encryption_type = 2
-
-//     const data = fetch(
-//       `http://localhost:8000/api/v1/get-content?public_key=${publicKey}&content_id=3`
-//     ).then((res) => res.json());
+//     const publicKey = eth
+//       .request({
+//         method: "eth_getEncryptionPublicKey",
+//         params: [address], // you must have access to the specified account
+//       })
+//       .then((result) => {
+//         encryptionPublicKey = result;
+//       })
+//       .catch((error) => {
+//         if (error.code === 4001) {
+//           // EIP-1193 userRejectedRequest error
+//           console.log("We can't encrypt anything without the key.");
+//         } else {
+//           console.error(error);
+//         }
+//       });
 
 //     // console.log(status, data);
 //     // todo: clear the mock data
@@ -77,6 +89,6 @@
 //     console.error("error", e);
 //     return false;
 //   }
-// }
+}
 
 export default null;
