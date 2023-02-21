@@ -30,20 +30,7 @@ export default function ContentPage() {
     }
   }, [checkPaymentRes]);
 
-  const { config } = usePrepareContractWrite({
-    address: unlockContractAddress,
-    abi: [
-      {
-        name: 'mint',
-        type: 'function',
-        stateMutability: 'nonpayable',
-        inputs: [],
-        outputs: [],
-      },
-    ],
-    functionName: 'mint',
-  })
-  const { write } = useContractWrite(config)
+  
 
   return (
     <div className={styles.container}>
@@ -59,7 +46,6 @@ export default function ContentPage() {
       <div className={styles.connect}>
         <button
           className={styles.mainButton}
-          onClick={()=>write?.()}
         >
           {loading ? <div className={styles.loading}></div> : "Get Content"}
         </button>
