@@ -16,13 +16,14 @@ import {
   tokenContractAddress,
 } from "../../constants/contract";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import Button from "../../components/button";
 
 export default function PayPage() {
   const { address } = useAccount(); // Get the user's address
   const router = useRouter();
 
   const [paymentToken, setToken] = useState("");
-  const [price, setPrice] = useState<any>(0);
+  const [price, setPrice] = useState<string>("");
   const [isApproved, setIsApproved] = useState(false);
 
   const {
@@ -39,7 +40,7 @@ export default function PayPage() {
     address: tokenContractAddress,
     abi: paymentTokenABI.abi,
     functionName: "approve",
-    args: [unlockContractAddress, BigNumber.from(price)],
+    args: [unlockContractAddress, BigNumber.from(price || 0)],
   });
 
   const {
@@ -64,7 +65,7 @@ export default function PayPage() {
   useEffect(() => {
     if (paymentTokenInfo) {
       setToken(paymentTokenInfo.paymentToken);
-      setPrice(BigNumber.from(paymentTokenInfo.amount));
+      setPrice(BigNumber.from(paymentTokenInfo.amount).toString());
     }
     if (ApproveRes) {
       setIsApproved(true);
@@ -87,14 +88,14 @@ export default function PayPage() {
       <div>Aries Horoscope for the Year 2023 ...</div>
       {/* {utils.parseUnits(price, 'ether')} */}
       <div className={styles.explain}>
-        {100000} TESTA to unlock the whole content
+        {price || "0"} TESTA to unlock the whole content;
       </div>
 
-      <button onClick={() => onApprove?.()}>Approve Token</button>
+      <Button onClick={() => onApprove?.()}>Approve Token</Button>
 
       <br></br>
 
-      <button onClick={() => onUnlock?.()}>Pay to Unlock</button>
+      <Button onClick={() => onUnlock?.()}>Pay to Unlock</Button>
     </div>
   );
 }

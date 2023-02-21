@@ -23,12 +23,11 @@ export default function ContentPage() {
   // todo: check the router jump
   useEffect(() => {
     setIsUnlocked(checkPaymentRes as boolean);
-    console.log(checkPaymentLoading, "sss", checkPaymentRes);
-    // if (!checkPaymentLoading && router && router.isReady && !isUnlocked) {
-    //   router.push({
-    //     pathname: "/buyer/pay",
-    //   });
-    // }
+    if (!checkPaymentLoading && router && router.isReady && !isUnlocked) {
+      router.push({
+        pathname: "/buyer/pay",
+      });
+    }
   }, [checkPaymentRes]);
 
   const { config } = usePrepareContractWrite({
