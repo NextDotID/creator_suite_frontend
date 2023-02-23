@@ -2,7 +2,7 @@ version: '3.8'
 services:
   frontend:
     image: ghcr.io/nextdotid/creator_suite_frontend_v2:latest
-    container_name: frontend
+    container_name: creatorsuite_frontend
     hostname: frontend
     build:
       context: ./
@@ -11,5 +11,3 @@ services:
       - .:/app
     ports:
       - "3000:3000"
-    environment:
-      NODE_ENV: development
