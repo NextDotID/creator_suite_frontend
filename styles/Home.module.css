@@ -99,4 +99,31 @@
     width: 100%;
     flex-direction: column;
   }
+  .choose_box{
+    flex-direction: column;
+  }
+  .role_item_box{
+    width: 90%;
+    padding: 1rem;
+    border-radius: 1rem;
+    font-size: 1.25rem;
+  }
+}
+
+.choose_box{
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+}
+.role_item_box{
+  padding: 1rem;
+  min-width: 10rem;
+  min-height: 10rem;
+  border-radius: 1rem;
+  font-size: 1.25rem;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

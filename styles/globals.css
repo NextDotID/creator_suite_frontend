@@ -1,9 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -13,4 +14,62 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.web3bio-cover::after {
+  border-radius: 50%;
+  content: "";
+  display: block;
+  filter: blur(3rem);
+  height: 50vh;
+  position: fixed;
+  width: 50vh;
+  z-index: 1;
+  animation: bg-animation 24s ease infinite;
+  animation-delay: 0;
+  background: linear-gradient(-45deg, #9186e7 5%, #92c9f9 50%, #c7f8ff 50%);
+  top: 0;
+  right: 10vh;
+}
+.web3bio-cover::before {
+  animation: bg-animation 24s ease infinite;
+  animation-delay: -8s;
+  background: linear-gradient(45deg, #fbf4ec 5%, #ecd7c8 50%, #eea4bc 5%);
+  left: 10vh;
+  bottom: 0;
+}
+.web3bio-cover {
+  background-image: radial-gradient(at 40% 33%, #fbf4ec 0px, transparent 30%),
+    radial-gradient(at 82% 10%, #ecd7c8 0px, transparent 30%),
+    radial-gradient(at 17% 11%, #eea4bc 0px, transparent 50%),
+    radial-gradient(at 48% 2%, #be88c4 0px, transparent 30%),
+    radial-gradient(at 39% 67%, #9186e7 0px, transparent 70%),
+    radial-gradient(at 86% 58%, #92c9f9 0px, transparent 50%),
+    radial-gradient(at 61% 57%, #c7f8ff 0px, transparent 50%);
+  display: block;
+  filter: blur(1rem);
+  height: 100vh;
+  left: 0;
+  opacity: 0.75;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: -1;
+}
+
+@keyframes bg-animation {
+  0% {
+    opacity: 1;
+    transform: skewX(30deg) translateX(-40vh);
+  }
+
+  50% {
+    opacity: 0.75;
+    transform: skewX(-30deg) translateX(40vh);
+  }
+
+  100% {
+    opacity: 1;
+    transform: skewX(30deg) translateX(-40vh);
+  }
 }
