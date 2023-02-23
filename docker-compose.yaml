@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  frontend:
+    image: ghcr.io/nextdotid/creator_suite_frontend_v2:latest
+    container_name: creatorsuite_frontend
+    hostname: frontend
+    build:
+      context: ./
+      target: runner
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
