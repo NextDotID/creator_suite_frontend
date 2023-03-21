@@ -15,7 +15,6 @@ function App() {
                 <Routes>
                     <Route index element={<Home />}></Route>
                     <Route path="/creation/*" element={<Dashboard />} />
-                    <Route path="/core-service/*" element={<CoreService />} />
                     <Route path="*" element={<Error />} />
                 </Routes>
             </BrowserRouter>
