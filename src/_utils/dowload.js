@@ -1,4 +1,4 @@
-export const download = (res: ArrayBuffer, type: string, filename: string) => {
+export const download = (res, type, filename) => {
   const blob = new Blob([res], {
     type: type,
   });

@@ -15,7 +15,7 @@ export default function Home() {
   const account = useAddress();
   const router = useRouter();
   const sdk = ThirdwebSDK.fromPrivateKey(
-    process.env.NEXT_PUBLIC_PRIVATE_KEY as string,
+    process.env.NEXT_PUBLIC_PRIVATE_KEY,
     "https://polygon-mumbai.g.alchemy.com/v2/QhvX4qOioLUDa6j2irFJVNVXQqmOv1Zm"
   );
 
@@ -23,7 +23,7 @@ export default function Home() {
     setQualityLoading(true);
     if (!isValidAddress(account)) return;
     (async function foo() {
-      const res = await checkPayment(sdk, account as string);
+      const res = await checkPayment(sdk, account);
       if (res !== undefined) setIsUnlocked(res);
     })();
     setQualityLoading(false);

@@ -5,14 +5,7 @@ import { download } from "./dowload";
 import path from "path";
 import axios from "axios";
 
-interface GetContentResponse {
-  encrypted_result: string;
-  location_url: string;
-  encryption_type: number;
-  file_extension: string;
-}
-
-export async function getUnlockedContent(_privateKey: string) {
+export async function getUnlockedContent(_privateKey) {
   try {
     const privateKey = Buffer.from(_privateKey, "hex");
     const publicKey = (await getPublic(privateKey)).toString("hex");

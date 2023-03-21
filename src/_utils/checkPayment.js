@@ -7,7 +7,7 @@ import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { isValidAddress } from "./utils";
 
 
-export async function checkPayment(sdk: ThirdwebSDK, address:string) {
+export async function checkPayment(sdk, address) {
   if(!isValidAddress(address)) return 
   const contract = await sdk.getContractFromAbi(unlockContractAddress, contractFile.abi);
   const isQualified = await contract.call("isQualified", address, assetID);
