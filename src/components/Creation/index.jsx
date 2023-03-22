@@ -19,6 +19,7 @@ import { resolveTransactionHashLink } from "../../helpers/resolveTransactionHash
 import { isGreaterThanOrEqualTo } from "../../helpers/isGreaterThanOrEqualTo";
 import { isValidAddress } from "../../helpers/isValidAddress";
 import { getQueryVariable } from "../../helpers/queryParams";
+import { download } from "../../helpers/download";
 
 export function Creation() {
   const [success, setSuccess] = useState(false);
@@ -164,13 +165,17 @@ export function Creation() {
 
                     <button
                       className="flex items-center justify-center w-1/2 max-w-sm px-8 py-3 text-base font-medium text-blue-700 border border-transparent rounded-md bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                    //   href={creation.attachments[0].content}
-                    //   download={creation.attachments[0].name}
-                    onClick={(e)=>{
-                        e.preventDefault()
-                        consoe.log('dowload')
-                        download()
-                    }}
+                      //   href={creation.attachments[0].content}
+                      //   download={creation.attachments[0].name}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        // download(
+                        //   bytes,
+                        //   "application/pdf;charset=UTF-8",
+                        //   `result.${creation.extension}`
+                        // );
+                        console.log('download')
+                      }}
                     >
                       Download
                     </button>
