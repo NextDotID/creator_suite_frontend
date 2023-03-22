@@ -6,7 +6,7 @@ import { useAllCreations } from '../../hooks/useAllCreations'
 
 export function AllCreations(props) {
     const { data, isValidating } = useAllCreations()
-    console.log(data,'data')
+
     if (isValidating) return <Spinner />
     if (!data.length) return <Empty />
 

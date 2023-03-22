@@ -5,6 +5,10 @@ import { isSameAddress } from "../helpers/isSameAddress";
 import { isGreaterThan } from "../helpers/isGreaterThan";
 import { isValidAddress } from "../helpers/isValidAddress";
 import { delay } from "../helpers/delay";
+import { readContract } from "@wagmi/core";
+import ContentSubscriptionABI from "../abis/ContentSubscription.json";
+
+const unlockContractAddress = "0xD82AEE2719B1D63961c3bC7971F51E2aCa725fE7";
 
 const creationStore = createInstance({
   name: "CreatorSuite",
@@ -174,12 +178,49 @@ export async function removeCreation(creationId) {
  * @param {string} creationId
  * @returns
  */
-export async function getCreation(creationId) {
+/**
+ * Create a creation from scratch
+ * @param {string} id
+ * @param {string} transactionHash
+ * @param {string} name
+ * @param {string} description
+ * @param {string} ownerAddress
+ * @param {string} paymentTokenAddress
+ * @param {string} paymentTokenAmount
+ * @param {string[]} attachments
+ * @param {string[]} buyers
+ * @returns
+ */
+export async function getCreation(creationId,creator) {
   // other db methods depend on getCreation()
   // await delay(500)
 
-  const creation = await creationStore.getItem(creationId);
-  if (isRemoved(creation)) return;
+  const assetId = await readContract({
+    address: unlockContractAddress,
+    abi: ContentSubscriptionABI,
+    functionName: "getAssetId",
+    args: [creator,creationId],
+  })
+  const paymentTokenInfo = await readContract({
+    address: unlockContractAddress,
+    abi: ContentSubscriptionABI,
+    functionName: "assetById",
+    args: [assetId],
+  });
+
+  const creation = {
+    id: creationId,
+    transactionHash: "",
+    name: "test",
+    description: "sss",
+    ownerAddress: "xxx",
+    paymentTokenAddress: paymentTokenInfo.paymentToken,
+    paymentTokenAmount: paymentTokenInfo.amount,
+    attachments: [],
+    buyers: [],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  };
   return creation;
 }
 
