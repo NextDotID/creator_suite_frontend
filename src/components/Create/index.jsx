@@ -8,6 +8,7 @@ import { isZero } from "../../helpers/isZero";
 import { isValidAddress } from "../../helpers/isValidAddress";
 import { TokenListMenu } from "../TokenListMenu";
 import { scale10 } from "../../helpers/scale10";
+import { useNavigate } from "react-router-dom";
 
 const defaultPaymentToken = TokenList["Mumbai"][0];
 
@@ -21,7 +22,7 @@ export function Create() {
   const [paymentTokenAmount, setPaymentTokenAmount] = useState("");
   const [attachments, setAttachments] = useState([]);
   const [sourceFile, setSouceFile] = useState("");
-
+  const navigate = useNavigate();
   const { address } = useAccount();
 
   const [submitted, setSubmitted] = useState(false);
@@ -254,7 +255,7 @@ export function Create() {
                     setSubmitted(true);
 
                     try {
-                      await trigger();
+                      const res = await trigger();
                       setSuccess(true);
 
                       // reset
@@ -265,6 +266,10 @@ export function Create() {
                       setAttachments([]);
                       setSubmitted(false);
                       if (success) {
+                        // todo: navigate or not
+                        // navigate(
+                        //   `/creation/${res.id}?creator=${res.ownerAddress}`
+                        // );
                       }
                     } catch (e) {
                       console.log(e, "error");

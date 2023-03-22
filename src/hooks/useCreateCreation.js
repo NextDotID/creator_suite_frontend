@@ -62,7 +62,6 @@ export function useCreateCreation(creation) {
         throw new Error("Invalid payment token address.");
       if (!isGreaterThan(paymentTokenAmount || 0, 0))
         throw new Error("Invalid payment token amount.");
-
       const creationId = await getNextAvailableCreationId({
         tokenAddress: paymentTokenAddress,
         amount: paymentTokenAmount,
@@ -71,12 +70,12 @@ export function useCreateCreation(creation) {
         creator: ownerAddress,
         file: file,
       });
-
       const transactionHash = await createAsset(
         creationId,
         paymentTokenAddress,
         paymentTokenAmount
       );
+
 
       return createCreation({
         ...creation,

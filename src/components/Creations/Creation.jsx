@@ -18,15 +18,15 @@ export function Creation(props) {
         <div className="w-full overflow-hidden bg-gray-200 rounded-md min-h-40 aspect-w-1 aspect-h-1 group-hover:opacity-75 lg:aspect-none lg:h-40">
           <span className="inline-flex items-center justify-center object-cover object-center w-full h-full text-6xl lg:h-full lg:w-full">
             {getFileType({
-              name: props.children[0].name,
-              content: props.children[0].name,
+              name: props.files[0].name,
+              content: props.files[0].name,
             }).toUpperCase()}
           </span>
         </div>
         <div className="mt-4">
           <h3 className="text-sm font-bold text-gray-700">
             <span aria-hidden="true" className="absolute inset-0" />
-            {props.children[0].name}
+            {props.files[0].name}
           </h3>
 
           <div className="flex items-center justify-between">

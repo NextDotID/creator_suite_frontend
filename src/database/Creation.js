@@ -77,28 +77,27 @@ function validateCreation(creation) {
  * @returns
  */
 export async function createCreation(initials) {
-  await delay(500);
-
   const { id: creationId, ownerAddress } = initials;
-  const creation = await getCreation(creationId);
-  if (creation) throw new Error("Already exists.");
+// //   const creation = await getCreation(creationId);
+// //   if (creation) throw new Error("Already exists.");
 
-  const now = Date.now();
+//   const now = Date.now();
 
-  await creationStore.setItem(
-    creationId,
-    validateCreation({
-      ...initials,
-      id: creationId,
-      attachments: initials.attachments ?? [],
-      buyers: initials.buyers ?? [],
-      createdAt: now,
-      updatedAt: now,
-    })
-  );
+//   await creationStore.setItem(
+//     creationId,
+//     validateCreation({
+//       ...initials,
+//       id: creationId,
+//       attachments: initials.attachments ?? [],
+//       buyers: initials.buyers ?? [],
+//       createdAt: now,
+//       updatedAt: now,
+//     })
+//   );
 
-  await commitCount(ownerAddress);
-  return creationStore.getItem(creationId);
+//   await commitCount(ownerAddress);
+
+  return initials;
 }
 
 /**
@@ -191,7 +190,7 @@ export async function removeCreation(creationId) {
  * @param {string[]} buyers
  * @returns
  */
-export async function getCreation(creationId,creator) {
+export async function getCreation(creationId, creator) {
   // other db methods depend on getCreation()
   // await delay(500)
 
@@ -199,8 +198,8 @@ export async function getCreation(creationId,creator) {
     address: unlockContractAddress,
     abi: ContentSubscriptionABI,
     functionName: "getAssetId",
-    args: [creator,creationId],
-  })
+    args: [creator, creationId],
+  });
   const paymentTokenInfo = await readContract({
     address: unlockContractAddress,
     abi: ContentSubscriptionABI,
@@ -208,18 +207,26 @@ export async function getCreation(creationId,creator) {
     args: [assetId],
   });
 
+  const _fetchedCreation = await fetch(
+    `http://localhost:8000/api/v1/content-info?content_id=${creationId}`
+  );
+  const remoteCreation = await _fetchedCreation.json();
+
   const creation = {
     id: creationId,
     transactionHash: "",
-    name: "test",
-    description: "sss",
-    ownerAddress: "xxx",
+    name: remoteCreation.name || remoteCreation.content_name,
+    description: remoteCreation.description,
+    ownerAddress: remoteCreation.creator_address,
     paymentTokenAddress: paymentTokenInfo.paymentToken,
     paymentTokenAmount: paymentTokenInfo.amount,
     attachments: [],
     buyers: [],
+    // todo: create time
+    // createdAt: new Date(remoteCreation.created_time),
+    // updatedAt: new Date(remoteCreation.update_time),
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   };
   return creation;
 }
@@ -230,12 +237,7 @@ export async function getCreation(creationId,creator) {
  */
 export async function getAllCreations() {
   const creations = [];
-  const res = await fetch("http://localhost:8000/api/v1/file/list", {
-    method: "POST",
-    body: JSON.stringify({
-      path: "/storage",
-    }),
-  });
+  const res = await fetch("http://localhost:8000/api/v1/file/list");
   const list = await res.json();
 
   if (list) {

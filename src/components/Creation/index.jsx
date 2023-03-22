@@ -35,7 +35,7 @@ export function Creation() {
     isValidating: isValidatingCreation,
     mutate,
   } = useCreation(creationId, creator);
-  console.log(creation,'kkkkk')
+  console.log(creation, "kkkkk");
   // const paymentToken = TOKEN_LIST['Mumbai'].find((x) => isSameAddress(x.address, creation?.paymentTokenAddress))
   const paymentToken = TOKEN_LIST["Mumbai"].find((x) =>
     isSameAddress(
@@ -78,8 +78,8 @@ export function Creation() {
         setShow={setShowPruchasedNotification}
       />
       <Previewer
-        title={creation.name}
-        attachment={creation.attachments[0] || {name:'',content:''}}
+        title={creation.name || "Empty"}
+        attachment={creation.attachments[0] || { name: "", content: "" }}
         open={openPreviewer}
         setOpen={setOpenPreviewer}
       />
@@ -92,7 +92,7 @@ export function Creation() {
               <div className="flex flex-col-reverse">
                 <div className="mt-4">
                   <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                    {creation.name}
+                    {creation.name || "Empty"}
                   </h1>
 
                   <h2 id="information-heading" className="sr-only">
@@ -152,22 +152,29 @@ export function Creation() {
               </div>
 
               <div className="grid grid-cols-1 mt-10 gap-x-6 gap-y-4 sm:grid-cols-1">
-                {owned ? (
-                  <button
-                    type="button"
-                    className="flex items-center justify-center w-1/2 max-w-sm px-8 py-3 text-base font-medium text-blue-700 border border-transparent rounded-md bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                    onClick={() => setOpenPreviewer(true)}
-                  >
-                    Preview
-                  </button>
-                ) : bought ? (
-                  <a
-                    className="flex items-center justify-center w-1/2 max-w-sm px-8 py-3 text-base font-medium text-blue-700 border border-transparent rounded-md bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                    href={creation.attachments[0].content}
-                    download={creation.attachments[0].name}
-                  >
-                    Download
-                  </a>
+                {owned || bought ? (
+                  <>
+                    <button
+                      type="button"
+                      className="flex items-center justify-center w-1/2 max-w-sm px-8 py-3 text-base font-medium text-blue-700 border border-transparent rounded-md bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                      onClick={() => setOpenPreviewer(true)}
+                    >
+                      Preview
+                    </button>
+
+                    <button
+                      className="flex items-center justify-center w-1/2 max-w-sm px-8 py-3 text-base font-medium text-blue-700 border border-transparent rounded-md bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                    //   href={creation.attachments[0].content}
+                    //   download={creation.attachments[0].name}
+                    onClick={(e)=>{
+                        e.preventDefault()
+                        consoe.log('dowload')
+                        download()
+                    }}
+                    >
+                      Download
+                    </button>
+                  </>
                 ) : (
                   <>
                     <button
