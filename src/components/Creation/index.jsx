@@ -56,9 +56,12 @@ export function Creation() {
 
   const owned = isSameAddress(creator, address);
 
+
   const bought = (creation?.buyers ?? []).find((x) =>
     isSameAddress(x.address, address)
   );
+
+  console.log(owned,bought,'isQualified',creator, address)
 
   const { trigger, isMutating } = usePurchaseCreation(creationId, address);
 
