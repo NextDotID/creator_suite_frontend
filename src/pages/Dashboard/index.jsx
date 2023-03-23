@@ -18,8 +18,8 @@ import { CreateSuiteLogo } from '../../components/Logo'
 import { NavigationIcon } from '../../components/NavigationIcon'
 
 const navigation = [
-    { name: 'Creations', to: '/creation', icon: NavigationIcon },
-    { name: 'List Creation', to: '/creation/create', icon: PlusCircleIcon },
+    { name: 'Creations', to: '/', icon: NavigationIcon },
+    { name: 'List Creation', to: '/create', icon: PlusCircleIcon },
 ]
 
 function getCurrentNavigation() {
@@ -270,7 +270,7 @@ export function Dashboard(props) {
                                 </Suspense>
                             }
                         />
-                        <Route path="/*" element={<Navigate to="/creation" />} />
+                        <Route path="/*" element={<Navigate to="/" />} />
                     </Routes>
                 </main>
             </div>

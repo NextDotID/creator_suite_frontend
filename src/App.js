@@ -11,7 +11,7 @@ function App() {
         <WagmiProvider>
             <BrowserRouter>
                 <Routes>
-                    <Route index path="/creation/*" element={<Dashboard />} />
+                    <Route index path="/*" element={<Dashboard />} />
                     <Route path="*" element={<Error />} />
                 </Routes>
             </BrowserRouter>

@@ -7,6 +7,7 @@ import { isValidAddress } from "../helpers/isValidAddress";
 import { delay } from "../helpers/delay";
 import { readContract } from "@wagmi/core";
 import ContentSubscriptionABI from "../abis/ContentSubscription.json";
+import { getAssetId } from "../connections";
 
 const unlockContractAddress = "0xD82AEE2719B1D63961c3bC7971F51E2aCa725fE7";
 
@@ -78,24 +79,24 @@ function validateCreation(creation) {
  */
 export async function createCreation(initials) {
   const { id: creationId, ownerAddress } = initials;
-// //   const creation = await getCreation(creationId);
-// //   if (creation) throw new Error("Already exists.");
+  // //   const creation = await getCreation(creationId);
+  // //   if (creation) throw new Error("Already exists.");
 
-//   const now = Date.now();
+  //   const now = Date.now();
 
-//   await creationStore.setItem(
-//     creationId,
-//     validateCreation({
-//       ...initials,
-//       id: creationId,
-//       attachments: initials.attachments ?? [],
-//       buyers: initials.buyers ?? [],
-//       createdAt: now,
-//       updatedAt: now,
-//     })
-//   );
+  //   await creationStore.setItem(
+  //     creationId,
+  //     validateCreation({
+  //       ...initials,
+  //       id: creationId,
+  //       attachments: initials.attachments ?? [],
+  //       buyers: initials.buyers ?? [],
+  //       createdAt: now,
+  //       updatedAt: now,
+  //     })
+  //   );
 
-//   await commitCount(ownerAddress);
+  //   await commitCount(ownerAddress);
 
   return initials;
 }
@@ -194,12 +195,8 @@ export async function getCreation(creationId, creator) {
   // other db methods depend on getCreation()
   // await delay(500)
 
-  const assetId = await readContract({
-    address: unlockContractAddress,
-    abi: ContentSubscriptionABI,
-    functionName: "getAssetId",
-    args: [creator, creationId],
-  });
+  const assetId = await getAssetId(creator, creationId);
+  console.log(assetId,'assetId')
   const paymentTokenInfo = await readContract({
     address: unlockContractAddress,
     abi: ContentSubscriptionABI,
