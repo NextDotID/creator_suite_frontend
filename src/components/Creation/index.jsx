@@ -21,7 +21,7 @@ import { isValidAddress } from "../../helpers/isValidAddress";
 import { getQueryVariable } from "../../helpers/queryParams";
 import { usePublicKey } from "../../hooks/usePublicKey";
 import { useGetContent } from "../../hooks/useGetContent";
-import { download } from "../../helpers/download";
+import { useDecryptDataAndDownload } from "../../hooks/useDecryptDataAndDownlad";
 
 export function Creation() {
   const [success, setSuccess] = useState(false);
@@ -52,6 +52,7 @@ export function Creation() {
   const { address } = useAccount();
 
   const { data: publicKey } = usePublicKey(address);
+  console.log(publicKey,'publickey')
   // todo: get EncryptedData here
   const { data: encryptedData } = useGetContent(publicKey, creationId);
 
@@ -70,7 +71,8 @@ export function Creation() {
 
   const { trigger, isMutating } = usePurchaseCreation(creationId, address);
 
-  const {trigger: handleDownLoad, isMutating: isDownloading} = useDecryptDataAndDownload(file)
+  const { trigger: handleDownLoad, isMutating: isDownloading } =
+    useDecryptDataAndDownload(file);
 
   const validationMessage = useMemo(() => {
     if (!isValidAddress(address)) return "";

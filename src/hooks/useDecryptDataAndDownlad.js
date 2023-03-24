@@ -15,7 +15,7 @@ export function useDecryptDataAndDownload(
   return useSWRMutation(
     "useDecryptDataAndDownload",
     async () => {
-      // todo: decry
+      // todo: decryt
       const eth = window.ethereum;
       if (!eth) return null;
       const _decryptedFileBytes = eth

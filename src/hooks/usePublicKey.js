@@ -1,18 +1,17 @@
 import useSWR from "swr";
-
 export function usePublicKey(address) {
   return useSWR(
     `usePublicKey_${address}`,
-    () => {
+    async () => {
       const eth = window.ethereum;
       if (!eth || !address) return null;
-      const publicKey = eth
+      const publicKey = await eth
         .request({
           method: "eth_getEncryptionPublicKey",
           params: [address], // you must have access to the specified account
         })
         .then((result) => {
-          return result
+          return result;
         })
         .catch((error) => {
           if (error.code === 4001) {
@@ -23,7 +22,8 @@ export function usePublicKey(address) {
           }
           return null;
         });
-      return Buffer.from(publicKey, "base64").toString("hex");
+
+      return publicKey;
     },
     {
       suspense: true,
