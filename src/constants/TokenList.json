@@ -1,0 +1,30 @@
+{
+    "Mainnet": [],
+    "Matic": [],
+    "Mumbai": [
+        {
+            "chainId": 80001,
+            "decimals": 18,
+            "symbol": "TESTA",
+            "name": " TestTokenA",
+            "address": "0x9801ca34B280b60292692E3fD00599f0Fbb8d6b2",
+            "logoURI": "https://mumbai.polygonscan.com/images/main/empty-token.png"
+        },
+        {
+            "chainId": 80001,
+            "decimals": 6,
+            "symbol": "USDC",
+            "name": "USDC",
+            "address": "0xBD2094e633296909DDc7954Cf2f29e2f508112a2",
+            "logoURI": "https://imagedelivery.net/PCnTHRkdRhGodr0AWBAvMA/Assets/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png/quality=85"
+        },
+        {
+            "chainId": 80001,
+            "decimals": 18,
+            "symbol": "MASK",
+            "name": "Mask Network",
+            "address": "0xF8935Df67cAB7BfcA9532D1Ac2088C5c39b995b5",
+            "logoURI": "https://imagedelivery.net/PCnTHRkdRhGodr0AWBAvMA/Assets/blockchains/ethereum/assets/0x69af81e73A73B40adF4f3d4223Cd9b1ECE623074/logo.png/quality=85"
+        }
+    ]
+}
