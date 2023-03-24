@@ -11,9 +11,9 @@ export function Creation(props) {
     // todo: dead code telsa here
     isSameAddress(x.address, "0x9801ca34B280b60292692E3fD00599f0Fbb8d6b2")
   );
-  console.log(props,'props')
+  
   return (
-    <Link to={`/creation/${props.id}?creator=${props.files[0].creator_address}`}>
+    <Link to={`/${props.id}?creator=${props.files[0].creator_address}`}>
       <div key={props.id} className="relative group">
         <div className="w-full overflow-hidden bg-gray-200 rounded-md min-h-40 aspect-w-1 aspect-h-1 group-hover:opacity-75 lg:aspect-none lg:h-40">
           <span className="inline-flex items-center justify-center object-cover object-center w-full h-full text-6xl lg:h-full lg:w-full">
