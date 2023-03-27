@@ -52,8 +52,6 @@ export function Creation() {
   const { address } = useAccount();
 
   const { data: publicKey } = usePublicKey(address);
-  console.log(publicKey,'publickey')
-  // todo: get EncryptedData here
   const { data: encryptedData } = useGetContent(publicKey, creationId);
 
   const { data: balance, isValidating: isValidatingBalance } = useBalanceOf(
