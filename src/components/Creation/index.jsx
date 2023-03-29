@@ -38,7 +38,6 @@ export function Creation() {
     isValidating: isValidatingCreation,
     mutate,
   } = useCreation(creationId, creator);
-  console.log(creation, "kkkkk");
   // const paymentToken = TOKEN_LIST['Mumbai'].find((x) => isSameAddress(x.address, creation?.paymentTokenAddress))
   const paymentToken = TOKEN_LIST["Mumbai"].find((x) =>
     isSameAddress(
