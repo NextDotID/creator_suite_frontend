@@ -21,6 +21,7 @@ import { isValidAddress } from "../../helpers/isValidAddress";
 import { getQueryVariable } from "../../helpers/queryParams";
 import { usePublicKey } from "../../hooks/usePublicKey";
 import { useGetContent } from "../../hooks/useGetContent";
+import { useDecryption } from "../../hooks/useDecryption";
 import { useDecryptDataAndDownload } from "../../hooks/useDecryptDataAndDownlad";
 
 export function Creation() {
@@ -52,7 +53,7 @@ export function Creation() {
 
   const { data: publicKey } = usePublicKey(address);
   const { data: encryptedData } = useGetContent(publicKey, creationId);
-
+  const { data: file } = useDecryption(encryptedData);
   const { data: balance, isValidating: isValidatingBalance } = useBalanceOf(
     paymentToken.address,
     address

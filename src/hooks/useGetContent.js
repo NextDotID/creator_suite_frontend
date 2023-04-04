@@ -29,9 +29,9 @@ export function useGetContent(publicKey, id) {
       });
       if (res) {
         const _res = await res.json();
-        console.log(_res, "ecriptedData");
+        return _res
       }
-      return res;
+      return null;
     },
     {
       suspense: true,
