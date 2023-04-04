@@ -7,15 +7,12 @@ import { download } from "../helpers/download";
  * @param {string} buyer the buyer address
  * @returns
  */
-export function useDecryptDataAndDownload(
-  file,
-  extension = "png",
-  file_name = "defualt_file_name"
-) {
+export function useDecryptDataAndDownload(file) {
+  const extension = file.file_extension || "png";
+  const file_name = "defualt_file_name";
   return useSWRMutation(
     "useDecryptDataAndDownload",
     async () => {
-      // todo: decryt
       const eth = window.ethereum;
       if (!eth) return null;
       const _decryptedFileBytes = eth

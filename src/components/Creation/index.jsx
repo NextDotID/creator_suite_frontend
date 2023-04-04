@@ -21,7 +21,6 @@ import { isValidAddress } from "../../helpers/isValidAddress";
 import { getQueryVariable } from "../../helpers/queryParams";
 import { usePublicKey } from "../../hooks/usePublicKey";
 import { useGetContent } from "../../hooks/useGetContent";
-import { useDecryption } from "../../hooks/useDecryption";
 import { useDecryptDataAndDownload } from "../../hooks/useDecryptDataAndDownlad";
 
 export function Creation() {
@@ -53,7 +52,6 @@ export function Creation() {
 
   const { data: publicKey } = usePublicKey(address);
   const { data: encryptedData } = useGetContent(publicKey, creationId);
-  const { data: file } = useDecryption(encryptedData);
   const { data: balance, isValidating: isValidatingBalance } = useBalanceOf(
     paymentToken.address,
     address
@@ -70,7 +68,7 @@ export function Creation() {
   const { trigger, isMutating } = usePurchaseCreation(creationId, address);
 
   const { trigger: handleDownLoad, isMutating: isDownloading } =
-    useDecryptDataAndDownload(file);
+    useDecryptDataAndDownload(encryptedData);
 
   const validationMessage = useMemo(() => {
     if (!isValidAddress(address)) return "";
@@ -179,12 +177,7 @@ export function Creation() {
                       //   download={creation.attachments[0].name}
                       onClick={(e) => {
                         e.preventDefault();
-                        // download(
-                        //   bytes,
-                        //   "application/pdf;charset=UTF-8",
-                        //   `result.${creation.extension}`
-                        // );
-                        console.log("download");
+                        handleDownLoad();
                       }}
                     >
                       Download
