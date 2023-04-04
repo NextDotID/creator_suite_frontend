@@ -11,7 +11,7 @@ export function Creation(props) {
     // todo: dead code telsa here
     isSameAddress(x.address, "0x9801ca34B280b60292692E3fD00599f0Fbb8d6b2")
   );
-  
+
   return (
     <Link to={`/${props.id}?creator=${props.files[0].creator_address}`}>
       <div key={props.id} className="relative group">

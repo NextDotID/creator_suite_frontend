@@ -196,7 +196,6 @@ export async function getCreation(creationId, creator) {
   // await delay(500)
 
   const assetId = await getAssetId(creator, creationId);
-  console.log(assetId,'assetId')
   const paymentTokenInfo = await readContract({
     address: unlockContractAddress,
     abi: ContentSubscriptionABI,
