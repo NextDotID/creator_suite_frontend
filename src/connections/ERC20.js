@@ -30,7 +30,7 @@ export async function allowance(address, owner, spender) {
     if (!isValidAddress(address)) throw new Error('Not a valid contract address.')
     if (!isValidAddress(owner)) throw new Error('Not a valid owner address.')
     if (!isValidAddress(spender)) throw new Error('Not a valid spender address.')
-
+    console.log(address, owner,spender)
     const amount = await readContract({
         chainId: polygonMumbai.id,
         address,

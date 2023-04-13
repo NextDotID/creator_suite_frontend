@@ -56,7 +56,6 @@ export async function createAsset(contentId, paymentTokenAddress, paymentTokenAm
         args: [contentId, paymentTokenAddress, paymentTokenAmount],
     })
     const { hash, wait,error } = await writeContract(config)
-    console.log(hash, error,' transwell')
     await wait()
     return hash
 }

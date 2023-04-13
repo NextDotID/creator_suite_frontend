@@ -38,14 +38,8 @@ export function Creation() {
     isValidating: isValidatingCreation,
     mutate,
   } = useCreation(creationId, creator);
-  // const paymentToken = TOKEN_LIST['Mumbai'].find((x) => isSameAddress(x.address, creation?.paymentTokenAddress))
   const paymentToken = TOKEN_LIST["Mumbai"].find((x) =>
-    isSameAddress(
-      x.address,
-      // todo: payment token
-      //   creation?.paymepaymentTokenAddressntToken,
-      "0x9801ca34B280b60292692E3fD00599f0Fbb8d6b2"
-    )
+    isSameAddress(x.address, creation?.paymentTokenAddress)
   );
 
   const { address } = useAccount();
@@ -63,9 +57,11 @@ export function Creation() {
     isSameAddress(x.address, address)
   );
 
-  console.log(owned, bought, "isQualified", creator, address);
-
-  const { trigger, isMutating } = usePurchaseCreation(creationId, address);
+  const { trigger, isMutating } = usePurchaseCreation(
+    creationId,
+    address,
+    creation
+  );
 
   const { trigger: handleDownLoad, isMutating: isDownloading } =
     useDecryptDataAndDownload(encryptedData);
@@ -199,7 +195,8 @@ export function Creation() {
                           await trigger();
                           await mutate();
                           setSuccess(true);
-                        } catch {
+                        } catch (e) {
+                          console.error(e, "purchase");
                           setSuccess(false);
 
                           // reset
@@ -217,8 +214,7 @@ export function Creation() {
                         ? "Paying..."
                         : `Pay ${formatBalance(
                             creation.paymentTokenAmount,
-                            paymentToken.decimals,
-                            2
+                            paymentToken.decimals
                           )} ${paymentToken.symbol} for full-access`}
                     </button>
                     {paymentToken ? (

@@ -202,6 +202,7 @@ export async function getCreation(creationId, creator) {
     args: [assetId],
   });
 
+
   const _fetchedCreation = await fetch(
     `http://localhost:8000/api/v1/content-info?content_id=${creationId}`
   );
