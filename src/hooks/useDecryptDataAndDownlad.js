@@ -1,6 +1,6 @@
 import useSWRMutation from "swr/mutation";
 import { download } from "../helpers/download";
-
+import { useAccount } from "wagmi";
 /**
  * Use to purchase a creation
  * @param {string} creationId
@@ -8,8 +8,10 @@ import { download } from "../helpers/download";
  * @returns
  */
 export function useDecryptDataAndDownload(file) {
+  console.log("kkkk", file);
   const extension = file.file_extension || "png";
   const file_name = "defualt_file_name";
+  const { address } = useAccount();
   return useSWRMutation(
     "useDecryptDataAndDownload",
     async () => {
@@ -18,7 +20,7 @@ export function useDecryptDataAndDownload(file) {
       const _decryptedFileBytes = eth
         .request({
           method: "eth_decrypt",
-          params: [file, accounts[0]],
+          params: [file.encrypted_result, address],
         })
         .then((decryptedMessage) => decryptedMessage)
         .catch((error) => {
