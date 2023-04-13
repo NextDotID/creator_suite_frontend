@@ -41,7 +41,11 @@ export function Creation(props) {
                 <span className="font-medium">
                   {/* {formatBalance(props.paymentTokenAmount, paymentToken.decimals, 2)}{' '}
                                     {paymentToken.symbol} */}
-                  {formatBalance(100000000000000, paymentToken.decimals, 2)}{" "}
+                  {formatBalance(
+                    100000000000000,
+                    paymentToken?.decimals || 18,
+                    2
+                  )}
                   {"Telsa"}
                 </span>
               </p>
