@@ -17,7 +17,7 @@ export function useDecryptDataAndDownload(file) {
     async () => {
       const eth = window.ethereum;
       if (!eth) return null;
-      const _decryptedFileBytes = eth
+      const _decryptedFileBytes = await eth
         .request({
           method: "eth_decrypt",
           params: [file.encrypted_result, address],
