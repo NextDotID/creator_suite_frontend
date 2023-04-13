@@ -8,7 +8,7 @@ export function formatBalance(
     places = decimals,
     isPrecise = false,
 ) {
-    let balance = new BigNumber(rawValue)
+    let balance = new BigNumber(rawValue.toString())
     if (!balance.isInteger()) {
         const message = `Expected an integer but got ${balance.toFixed()}`
         if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
