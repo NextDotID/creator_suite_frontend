@@ -22,6 +22,7 @@ import { getQueryVariable } from "../../helpers/queryParams";
 import { usePublicKey } from "../../hooks/usePublicKey";
 import { useGetContent } from "../../hooks/useGetContent";
 import { useDecryptDataAndDownload } from "../../hooks/useDecryptDataAndDownlad";
+import { useQualified } from "../../hooks/useQualified";
 
 export function Creation() {
   const [success, setSuccess] = useState(false);
@@ -53,9 +54,7 @@ export function Creation() {
 
   const owned = isSameAddress(creator, address);
 
-  const bought = (creation?.buyers ?? []).find((x) =>
-    isSameAddress(x.address, address)
-  );
+  const { data: bought } = useQualified(creator, address, creationId);
 
   const { trigger, isMutating } = usePurchaseCreation(
     creationId,
