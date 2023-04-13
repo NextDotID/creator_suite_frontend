@@ -2,7 +2,7 @@
   "Mainnet": "",
   "Matic": "",
   "Mumbai": {
-    "address": "0xD82AEE2719B1D63961c3bC7971F51E2aCa725fE7",
+    "address": "0x3A6c014579583c5D412A9F3914a67C0885dB90c0",
     "abi": {
       "_format": "hh-sol-artifact-1",
       "contractName": "ContentSubscription",

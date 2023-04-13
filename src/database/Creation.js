@@ -8,8 +8,7 @@ import { delay } from "../helpers/delay";
 import { readContract } from "@wagmi/core";
 import ContentSubscriptionABI from "../abis/ContentSubscription.json";
 import { getAssetId } from "../connections";
-
-const unlockContractAddress = "0xD82AEE2719B1D63961c3bC7971F51E2aCa725fE7";
+import { getSubscriptionContractAddress } from "../helpers/getSubscriptionContractAddress";
 
 const creationStore = createInstance({
   name: "CreatorSuite",
@@ -197,7 +196,7 @@ export async function getCreation(creationId, creator) {
 
   const assetId = await getAssetId(creator, creationId);
   const paymentTokenInfo = await readContract({
-    address: unlockContractAddress,
+    address: getSubscriptionContractAddress(),
     abi: ContentSubscriptionABI,
     functionName: "assetById",
     args: [assetId],

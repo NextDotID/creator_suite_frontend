@@ -3,6 +3,7 @@ import { createCreation, getCount } from "../database";
 import { connectIfNeeded, createAsset, getAssetId } from "../connections";
 import { isValidAddress } from "../helpers/isValidAddress";
 import { isGreaterThan } from "../helpers/isGreaterThan";
+import { getSubscriptionContractAddress } from "../helpers/getSubscriptionContractAddress";
 
 async function getNextAvailableCreationId(params) {
   const { encryptionType, fileExtension, creator, file, name, description } =
@@ -14,7 +15,7 @@ async function getNextAvailableCreationId(params) {
   const reqData = new FormData();
 
   const createAssetReq = {
-    managed_contract: "0x3A6c014579583c5D412A9F3914a67C0885dB90c0",
+    managed_contract: getSubscriptionContractAddress(),
     network: "mumbai",
     content_name: name,
     description: description,
