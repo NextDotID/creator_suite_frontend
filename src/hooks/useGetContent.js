@@ -6,7 +6,7 @@ export function useGetContent(publicKey, id) {
     `useGetContent_${publicKey}_${id}`,
     async () => {
       if (!window.ethereum) return;
-      const SignPayload = `Payment account: ${address}, timestamp:${new Date().getTime()}`;
+      const SignPayload = `Payment account: ${address}, timestamp:${Math.round(new Date().getTime()/1000)}`;
       let sig = null;
       try {
         const eth = window.ethereum;
@@ -23,7 +23,7 @@ export function useGetContent(publicKey, id) {
         body: JSON.stringify({
           content_id: Number(id),
           encryption_public_key: publicKey,
-          sign_payload: SignPayload,
+          signature_payload: SignPayload,
           signature: sig,
         }),
       });
