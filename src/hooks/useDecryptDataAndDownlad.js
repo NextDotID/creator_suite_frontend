@@ -8,8 +8,6 @@ import { useAccount } from "wagmi";
  * @returns
  */
 export function useDecryptDataAndDownload(file) {
-  console.log("kkkk", file);
-  const extension = file.file_extension || "png";
   const file_name = "defualt_file_name";
   const { address } = useAccount();
   return useSWRMutation(
@@ -27,7 +25,7 @@ export function useDecryptDataAndDownload(file) {
           console.error("error", error);
           null;
         });
-      return download(_decryptedFileBytes, extension, file_name);
+      return download(_decryptedFileBytes, file?.file_extension, file_name);
     },
     {
       suspense: true,

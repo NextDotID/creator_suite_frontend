@@ -39,6 +39,7 @@ export function Creation() {
     isValidating: isValidatingCreation,
     mutate,
   } = useCreation(creationId, creator);
+
   const paymentToken = TOKEN_LIST["Mumbai"].find((x) =>
     isSameAddress(x.address, creation?.paymentTokenAddress)
   );
@@ -166,17 +167,20 @@ export function Creation() {
                       Preview
                     </button>
 
-                    <button
-                      className="flex items-center justify-center w-1/2 max-w-sm px-8 py-3 text-base font-medium text-blue-700 border border-transparent rounded-md bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                      //   href={creation.attachments[0].content}
-                      //   download={creation.attachments[0].name}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleDownLoad();
-                      }}
-                    >
-                      Download
-                    </button>
+                    {!owned && (
+                      <button
+                        className="flex items-center justify-center w-1/2 max-w-sm px-8 py-3 text-base font-medium text-blue-700 border border-transparent rounded-md bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                        //   href={creation.attachments[0].content}
+                        //   download={creation.attachments[0].name}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          console.log(encryptedData,'encrypted data')
+                          handleDownLoad();
+                        }}
+                      >
+                        Download
+                      </button>
+                    )}
                   </>
                 ) : (
                   <>
