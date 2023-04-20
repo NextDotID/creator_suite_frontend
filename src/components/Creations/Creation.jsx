@@ -8,8 +8,7 @@ import { isSameAddress } from "../../helpers/isSameAddress";
 
 export function Creation(props) {
   const paymentToken = TOKEN_LIST["Mumbai"].find((x) =>
-    // todo: dead code telsa here
-    isSameAddress(x.address, "0x9801ca34B280b60292692E3fD00599f0Fbb8d6b2")
+    isSameAddress(x.address, props.paymentToken?.address)
   );
   return (
     <Link to={`/${props.id}?creator=${props.files[0].creator_address}`}>

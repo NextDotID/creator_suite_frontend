@@ -8,7 +8,6 @@ import { isZero } from "../../helpers/isZero";
 import { isValidAddress } from "../../helpers/isValidAddress";
 import { TokenListMenu } from "../TokenListMenu";
 import { scale10 } from "../../helpers/scale10";
-import { useNavigate } from "react-router-dom";
 
 const defaultPaymentToken = TokenList["Mumbai"][0];
 
@@ -21,12 +20,12 @@ export function Create() {
   const [paymentToken, setPaymentToken] = useState(defaultPaymentToken);
   const [paymentTokenAmount, setPaymentTokenAmount] = useState("");
   const [attachments, setAttachments] = useState([]);
+  const [type, setType] = useState(2);
+  const [password, setPassword] = useState("");
   const [sourceFile, setSouceFile] = useState("");
-  const navigate = useNavigate();
   const { address } = useAccount();
 
   const [submitted, setSubmitted] = useState(false);
-
   const validationMessage = useMemo(() => {
     if (!name) return "Please enter creation name.";
     if (!paymentToken.address) return "Please select the price token.";
@@ -58,6 +57,8 @@ export function Create() {
       ).toFixed(),
       attachments,
       file: sourceFile,
+      encryption_type: type,
+      password,
     };
   }, [
     address,
@@ -67,10 +68,11 @@ export function Create() {
     paymentTokenAmount,
     attachments,
     sourceFile,
+    type,
+    password,
   ]);
 
   const { trigger, isMutating } = useCreateCreation(creation);
-
   return (
     <>
       <CreatedNotification
@@ -180,6 +182,44 @@ export function Create() {
                   </div>
                 </div>
 
+                <div className="sm:col-span-4">
+                  <label
+                    htmlFor="price"
+                    className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    Decryption type
+                  </label>
+                  <select
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
+                    id="Decryption type"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  >
+                    <option value={1}>AES</option>
+                    <option value={2}>ECC</option>
+                  </select>
+                </div>
+                {type == 1 && (
+                  <div className="sm:col-span-4">
+                    <label
+                      htmlFor="price"
+                      className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                    >
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      autoComplete="password"
+                      placeholder="Enter your password"
+                      className="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm focus:z-10"
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                    />
+                  </div>
+                )}
+
                 <div className="sm:col-span-6">
                   <label
                     htmlFor="cover-photo"
@@ -263,6 +303,7 @@ export function Create() {
                       setDescription("");
                       setPaymentToken(defaultPaymentToken);
                       setPaymentTokenAmount("");
+                      setType(0);
                       setAttachments([]);
                       setSubmitted(false);
                       if (success) {

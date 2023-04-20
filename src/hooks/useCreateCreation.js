@@ -6,8 +6,15 @@ import { isGreaterThan } from "../helpers/isGreaterThan";
 import { getSubscriptionContractAddress } from "../helpers/getSubscriptionContractAddress";
 
 async function getNextAvailableCreationId(params) {
-  const { encryptionType, fileExtension, creator, file, name, description } =
-    params;
+  const {
+    encryptionType,
+    fileExtension,
+    creator,
+    file,
+    name,
+    description,
+    password,
+  } = params;
 
   if (params.encryptionType === 1 && !params.password) {
     return null;
@@ -19,7 +26,7 @@ async function getNextAvailableCreationId(params) {
     network: "mumbai",
     content_name: name,
     description: description,
-    password: params.password ?? "",
+    password: password ?? "",
     encryption_type: encryptionType,
     creator_address: creator,
     file: file,
@@ -56,6 +63,8 @@ export function useCreateCreation(creation) {
         file,
         name,
         description,
+        encryption_type,
+        password,
       } = creation;
 
       if (!isValidAddress(ownerAddress))
@@ -68,12 +77,13 @@ export function useCreateCreation(creation) {
         tokenAddress: paymentTokenAddress,
         amount: paymentTokenAmount,
         // 1 password 2 null
-        encryptionType: 2,
+        encryptionType: encryption_type,
         fileExtension: attachments[0].name.split(".")[1],
         creator: ownerAddress,
         file,
         name,
         description,
+        password,
       });
       const transactionHash = await createAsset(
         creationId,
