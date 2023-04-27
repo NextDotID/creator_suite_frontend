@@ -47,7 +47,11 @@ export function Creation() {
   const { address } = useAccount();
 
   const { data: publicKey } = usePublicKey(address);
-  const { data: encryptedData } = useGetContent(publicKey, creationId);
+  const {
+    trigger: getContent,
+    isMutating: isGetContentLoading,
+    data: encryptedData,
+  } = useGetContent(publicKey, creationId);
   const { data: balance, isValidating: isValidatingBalance } = useBalanceOf(
     paymentToken.address,
     address
@@ -172,13 +176,14 @@ export function Creation() {
                         className="flex items-center justify-center w-1/2 max-w-sm px-8 py-3 text-base font-medium text-blue-700 border border-transparent rounded-md bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                         //   href={creation.attachments[0].content}
                         //   download={creation.attachments[0].name}
-                        onClick={(e) => {
+                        onClick={async (e) => {
                           e.preventDefault();
-                          console.log(encryptedData,'encrypted data')
+                          await getContent();
+                          console.log(encryptedData, "encrypted data");
                           handleDownLoad();
                         }}
                       >
-                        Download
+                        {isGetContentLoading ? "Downloading..." : "Download"}
                       </button>
                     )}
                   </>

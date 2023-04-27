@@ -1,8 +1,8 @@
-import useSWR from "swr";
+import useSWRMutation from "swr/mutation";
 import { useAccount } from "wagmi";
 export function useGetContent(publicKey, id) {
   const { address } = useAccount();
-  return useSWR(
+  return useSWRMutation(
     `useGetContent_${publicKey}_${id}`,
     async () => {
       if (!window.ethereum) return;
