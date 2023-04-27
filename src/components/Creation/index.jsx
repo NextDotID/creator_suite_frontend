@@ -180,7 +180,7 @@ export function Creation() {
                           e.preventDefault();
                           await getContent();
                           console.log(encryptedData, "encrypted data");
-                          handleDownLoad();
+                          await handleDownLoad();
                         }}
                       >
                         {isGetContentLoading ? "Downloading..." : "Download"}
